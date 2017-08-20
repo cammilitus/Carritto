@@ -1,0 +1,24 @@
+c:\users\ceibal\documents\visual studio 2017\Projects\Practico Obligatorio\Practico Obligatorio\bin\Debug\Practico Obligatorio.exe.config
+c:\users\ceibal\documents\visual studio 2017\Projects\Practico Obligatorio\Practico Obligatorio\bin\Debug\Practico Obligatorio.exe
+c:\users\ceibal\documents\visual studio 2017\Projects\Practico Obligatorio\Practico Obligatorio\bin\Debug\Practico Obligatorio.pdb
+c:\users\ceibal\documents\visual studio 2017\Projects\Practico Obligatorio\Practico Obligatorio\obj\Debug\Practico Obligatorio.csprojResolveAssemblyReference.cache
+c:\users\ceibal\documents\visual studio 2017\Projects\Practico Obligatorio\Practico Obligatorio\obj\Debug\Practico Obligatorio.exe
+c:\users\ceibal\documents\visual studio 2017\Projects\Practico Obligatorio\Practico Obligatorio\obj\Debug\Practico Obligatorio.pdb
+C:\Users\pMalvasio\Documents\Practico Obligatorio\Practico Obligatorio\bin\Debug\Practico Obligatorio.exe.config
+C:\Users\pMalvasio\Documents\Practico Obligatorio\Practico Obligatorio\bin\Debug\Practico Obligatorio.exe
+C:\Users\pMalvasio\Documents\Practico Obligatorio\Practico Obligatorio\bin\Debug\Practico Obligatorio.pdb
+C:\Users\pMalvasio\Documents\Practico Obligatorio\Practico Obligatorio\obj\Debug\Practico Obligatorio.csprojResolveAssemblyReference.cache
+C:\Users\pMalvasio\Documents\Practico Obligatorio\Practico Obligatorio\obj\Debug\Practico Obligatorio.exe
+C:\Users\pMalvasio\Documents\Practico Obligatorio\Practico Obligatorio\obj\Debug\Practico Obligatorio.pdb
+C:\Users\Ceibal\Desktop\Practico Obligatorio\Practico Obligatorio\bin\Debug\Practico Obligatorio.exe.config
+C:\Users\Ceibal\Desktop\Practico Obligatorio\Practico Obligatorio\bin\Debug\Practico Obligatorio.exe
+C:\Users\Ceibal\Desktop\Practico Obligatorio\Practico Obligatorio\bin\Debug\Practico Obligatorio.pdb
+C:\Users\Ceibal\Desktop\Practico Obligatorio\Practico Obligatorio\obj\Debug\Practico Obligatorio.csprojResolveAssemblyReference.cache
+C:\Users\Ceibal\Desktop\Practico Obligatorio\Practico Obligatorio\obj\Debug\Practico Obligatorio.exe
+C:\Users\Ceibal\Desktop\Practico Obligatorio\Practico Obligatorio\obj\Debug\Practico Obligatorio.pdb
+C:\Users\Ceibal\Desktop\Practico Obligatorio v1\Practico Obligatorio\bin\Debug\Practico Obligatorio.exe.config
+C:\Users\Ceibal\Desktop\Practico Obligatorio v1\Practico Obligatorio\bin\Debug\Practico Obligatorio.exe
+C:\Users\Ceibal\Desktop\Practico Obligatorio v1\Practico Obligatorio\bin\Debug\Practico Obligatorio.pdb
+C:\Users\Ceibal\Desktop\Practico Obligatorio v1\Practico Obligatorio\obj\Debug\Practico Obligatorio.csprojResolveAssemblyReference.cache
+C:\Users\Ceibal\Desktop\Practico Obligatorio v1\Practico Obligatorio\obj\Debug\Practico Obligatorio.exe
+C:\Users\Ceibal\Desktop\Practico Obligatorio v1\Practico Obligatorio\obj\Debug\Practico Obligatorio.pdb
