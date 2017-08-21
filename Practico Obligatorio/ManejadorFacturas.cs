@@ -65,7 +65,7 @@ namespace Practico_Obligatorio
                 {
                     if ((id != "") && (IsDigitsOnly(id)))
                     {
-                        var usarCI = ManejadorCliente.Instance.BuscarCliente(id);
+                        var usarCI = ManejadorPersona.Instance.BuscarCliente(id);
                         if (usarCI == null)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;

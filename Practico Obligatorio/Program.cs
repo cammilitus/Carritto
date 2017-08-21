@@ -13,6 +13,7 @@ namespace Practico_Obligatorio
             string opcionMenu;            
             while (programaCorriendo)
             {
+                Sistema.Instance.CrearAdmin();
                 Sistema.Instance.MenuPrincipal();
                 opcionMenu = Console.ReadLine();
                 var opcionChar = opcionMenu.ToCharArray();

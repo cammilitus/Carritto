@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Practico_Obligatorio
 {
-    class ManejadorCliente
+    class ManejadorPersona
     {
-        private static ManejadorCliente instance;
-        private List<Cliente> Lista_Cliente = new List<Cliente>();      
-        private ManejadorCliente() { }
-        public static ManejadorCliente Instance
+        private static ManejadorPersona instance;
+        private List<Persona> Lista_Personas = new List<Persona>();      
+        private ManejadorPersona() { }
+        public static ManejadorPersona Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new ManejadorCliente();
+                    instance = new ManejadorPersona();
                 }
                 return instance;
             }
@@ -121,7 +121,7 @@ namespace Practico_Obligatorio
                     documento = Console.ReadLine();
                     if ((documento != "") && (IsDigitsOnly(documento)))
                     {
-                        var buscarDocumento = Lista_Cliente.Find(x => x.cedula_Rut == Convert.ToInt32(documento));
+                        var buscarDocumento = Lista_Personas.Find(x => x.cedula_Rut == Convert.ToInt32(documento));
                         if (buscarDocumento == null)
                         {
                             if ((documento.Length == 8) ||(documento.Length == 7))
@@ -220,28 +220,39 @@ namespace Practico_Obligatorio
                     fechavalida2 = false;
                 }
             } while (!fechavalida2);
-            Lista_Cliente.Add(cliente);
+            Lista_Personas.Add(cliente);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Cliente ingresado exitosamente" + "\n");
             Console.ResetColor();            
         }
 
-        public void ImprimirClientes()
+        public void ImprimirPersonas()
         {
-            for (int indice = 0; indice < Lista_Cliente.Count; indice++)
+            for (int indice = 0; indice < Lista_Personas.Count; indice++)
             {
-                Lista_Cliente[indice].imprimirCliente();
+                Lista_Personas[indice].ImprimirPersona();
             }
         }
 
-        public Cliente BuscarCliente(string id)
+        public Persona BuscarCliente(string id)
         {
-            return Lista_Cliente.Find(x => x.cedula_Rut == Convert.ToInt32(id));
+            return Lista_Personas.Find(x => x.cedula_Rut == Convert.ToInt32(id));
         }
 
         public bool ExistenClientes()
         {
-            return Lista_Cliente.Count > 0;
+            return Lista_Personas.Count > 0;
+        }
+
+        public void CrearAdmin()
+        {
+            Vendedor admin = new Vendedor();
+            admin.nombre = "Admin";
+            admin.cedula_Rut = 53927851;
+            admin.telefono = "12345678";
+            admin.fecha_Nacimiento = Convert.ToDateTime(12 / 12 / 98);
+            admin.contraseña = "Contra$en4";
+            Lista_Personas.Add(admin);
         }
     }
 }

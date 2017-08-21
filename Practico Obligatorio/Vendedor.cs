@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace Practico_Obligatorio
 {
-    public class Cliente : Persona
+    class Vendedor : Persona
     {
-        public string domicilio { get; set; }        
+        public string telefono { get; set; }
+        public string contraseña { get; set; }
+
         public override void ImprimirPersona()
         {
             Console.WriteLine("Nombre: " + this.nombre);
             Console.WriteLine("CI o RUT" + this.cedula_Rut);
-            Console.WriteLine("Domicilio " + this.domicilio);                        
-        }        
+            Console.WriteLine("Telefono " + this.telefono);
+        }
     }
 }

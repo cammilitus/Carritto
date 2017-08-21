@@ -22,6 +22,10 @@ namespace Practico_Obligatorio
             }
         }
 
+        public void CrearAdmin()
+        {
+            ManejadorPersona.Instance.CrearAdmin();
+        }
         //ImpresionMenu
         public void MenuPrincipal()
         {
@@ -49,14 +53,14 @@ namespace Practico_Obligatorio
         //Metodos de Clientes
         public void AgregarCliente()
         {
-            ManejadorCliente.Instance.AgregarCliente();
+            ManejadorPersona.Instance.AgregarCliente();
         }
         
         public void ListarCLientes()
         {
-            if (ManejadorCliente.Instance.ExistenClientes())
+            if (ManejadorPersona.Instance.ExistenClientes())
             {
-                ManejadorCliente.Instance.ImprimirClientes();
+                ManejadorPersona.Instance.ImprimirPersonas();
             }
             else
             {
@@ -69,7 +73,7 @@ namespace Practico_Obligatorio
         //Metodos de Facturas
         public void AgregarFactura()
         {
-            if (ManejadorCliente.Instance.ExistenClientes() && ManejadorProductos.Instance.ExistenProductos())
+            if (ManejadorPersona.Instance.ExistenClientes() && ManejadorProductos.Instance.ExistenProductos())
             {
                 ManejadorFacturas.Instance.AgregarFactura();
             }
