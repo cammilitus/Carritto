@@ -9,7 +9,7 @@ namespace Practico_Obligatorio
     class Factura
     {
         public DateTime fecha;
-        public Cliente cliente;
+        public Persona cliente;
         public List<int> listaCantidadProducto;
         public List <Producto> lista_productos;
         public void imprimirFactura()

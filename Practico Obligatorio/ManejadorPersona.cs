@@ -250,7 +250,7 @@ namespace Practico_Obligatorio
             admin.nombre = "Admin";
             admin.cedula_Rut = 53927851;
             admin.telefono = "12345678";
-            admin.fecha_Nacimiento = Convert.ToDateTime(12 / 12 / 98);
+            //admin.fecha_Nacimiento = Convert.ToDateTime(12 / 12 / 98); me tira excepcion
             admin.contraseña = "Contra$en4";
             Lista_Personas.Add(admin);
         }

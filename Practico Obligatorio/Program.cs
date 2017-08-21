@@ -13,6 +13,7 @@ namespace Practico_Obligatorio
             string opcionMenu;            
             while (programaCorriendo)
             {
+               // Sistema.Ingresocontrasenia();
                 Sistema.Instance.CrearAdmin();
                 Sistema.Instance.MenuPrincipal();
                 opcionMenu = Console.ReadLine();
@@ -23,7 +24,7 @@ namespace Practico_Obligatorio
                     {
                         //Menu de registro
                         case 1:
-                        Sistema.Instance.MenuRegistro();
+                            Sistema.Instance.MenuRegistroAdmin();
                         opcionMenu = Console.ReadLine();
                         var opcionChar1 = opcionMenu.ToCharArray();
                         if ((opcionMenu != "") && (Char.IsNumber(opcionChar1[0])))

@@ -12,6 +12,7 @@ namespace Practico_Obligatorio
         public string marca;
         public int codigo_identificacion;
         public int precio;
+        public int stock;
         public void imprimirProducto()
         {
             System.Console.WriteLine("Nombre : " + this.nombre);

@@ -123,6 +123,45 @@ namespace Practico_Obligatorio
                 }
 
             }
+
+            ingresarDeNuevo = true;
+            while (ingresarDeNuevo)
+            {
+                try
+                {
+                    Console.Write("Stock inicial: ");
+                    var stock = Console.ReadLine();
+                    if (IsDigitsOnly(stock))
+                    {
+                        int stockValido = Convert.ToInt32(stock);
+                        if (stockValido > 0)
+                        {
+                            producto.stock = stockValido;
+                            ingresarDeNuevo = false;
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+                    }
+
+                    else
+                    {
+                        throw new Exception();
+                    }
+
+                    ingresarDeNuevo = false;
+                }
+                catch (Exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("La cantidad de stock tiene que ser un entero positivo" + "\n");
+                    Console.ResetColor();
+
+
+                }
+
+            }
             producto.codigo_identificacion = identificador;
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Producto creado con el codigo " + identificador + "\n");
