@@ -125,7 +125,7 @@ namespace Practico_Obligatorio
         //Metodos de Facturas
         public void AgregarFactura()
         {
-            if (ManejadorPersona.Instance.ExistenClientes() && ManejadorProductos.Instance.ExistenProductos())
+            if ((ManejadorPersona.Instance.ExistenClientes()) && (ManejadorProductos.Instance.ExistenProductos()))
             {
                 ManejadorFacturas.Instance.AgregarFactura();
             }

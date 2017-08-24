@@ -10,6 +10,7 @@ namespace Practico_Obligatorio
     {
         private static ManejadorProductos instance;
         private List<Producto> Lista_Productos = new List<Producto>();
+        int identificador = 0;
         private ManejadorProductos() { }
         public static ManejadorProductos Instance
         {
@@ -37,7 +38,6 @@ namespace Practico_Obligatorio
 
         public void AgregarProducto()
         {
-            int identificador = 0;
             bool ingresarDeNuevo = true;
             Producto producto = new Producto();
             while (ingresarDeNuevo)
@@ -181,12 +181,7 @@ namespace Practico_Obligatorio
         public Producto BuscarProducto(string productoValido)
         {
             return Lista_Productos.Find(x => x.codigo_identificacion == Convert.ToInt32(productoValido));
-        }
-
-        public Producto StockProducto(string stockValido)
-        {
-            return Lista_Productos.Find(x => x.stock == Convert.ToInt32(stockValido));
-        }
+        }               
 
         public bool ExistenProductos()
         {

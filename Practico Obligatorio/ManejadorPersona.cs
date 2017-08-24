@@ -383,7 +383,15 @@ namespace Practico_Obligatorio
 
         public bool ExistenClientes()
         {
-            return Lista_Personas.Count > 0;
+            foreach (Persona persona in Lista_Personas)
+            {
+                if (persona.GetType() == typeof(Cliente))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public void CrearAdmin()
