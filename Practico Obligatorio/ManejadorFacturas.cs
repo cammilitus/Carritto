@@ -71,6 +71,7 @@ namespace Practico_Obligatorio
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("El cliente de CI o RUT " + id + " no existe \n");
                             Console.ResetColor();
+                            ingresarDeNuevo = true;
                         }
                         else
                         {
@@ -121,11 +122,28 @@ namespace Practico_Obligatorio
                             while (ingresarCantidadDeNuevo)
                             {
                                 Console.Write("Cantidad del producto ingresado:");
-                                var cantidadProducto = (Console.ReadLine());
-                                if (IsDigitsOnly(cantidadProducto))
+                                var stockProducto = (Console.ReadLine());
+                                if (IsDigitsOnly(stockProducto))
                                 {
-                                    factura.listaCantidadProducto.Add(Convert.ToInt32(cantidadProducto));
-                                    ingresarCantidadDeNuevo = false;
+                                    if (Convert.ToInt32(stockProducto) > 0)
+                                    {
+                                        var stockValido = ManejadorProductos.Instance.StockProducto(productoValido);
+                                        if (stockValido.stock <= Convert.ToInt32(stockProducto))
+                                        {
+                                            
+                                            factura.listaCantidadProducto.Add(Convert.ToInt32(stockProducto));
+                                            ingresarCantidadDeNuevo = false;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("El stock disponible es " + stockValido.stock);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Debe ingresar un entero mayor a cero" + "\n");
+                                    }
+
                                 }
                                 else
                                 {
@@ -151,6 +169,7 @@ namespace Practico_Obligatorio
             Console.ResetColor();
         }
 
+       
         public void ImprimirFactura()
         {
             for (int indice = 0; indice < Lista_Facturas.Count; indice++)

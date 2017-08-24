@@ -110,25 +110,23 @@ namespace Practico_Obligatorio
 
             }
             var documentoValido = false;
-            string documento;
+            string documentoCliente;
             while (!documentoValido)
             {
                 try
                 {
-
-
                     Console.Write("Cedula o RUT: ");
-                    documento = Console.ReadLine();
-                    if ((documento != "") && (IsDigitsOnly(documento)))
+                    documentoCliente = Console.ReadLine();
+                    if ((documentoCliente != "") && (IsDigitsOnly(documentoCliente)))
                     {
-                        var buscarDocumento = Lista_Personas.Find(x => x.cedula_Rut == Convert.ToInt32(documento));
-                        if (buscarDocumento == null)
+                        var buscarDocumentoCliente = Lista_Personas.Find(x => x.cedula_Rut == Convert.ToInt32(documentoCliente));
+                        if (buscarDocumentoCliente == null)
                         {
-                            if ((documento.Length == 8) ||(documento.Length == 7))
+                            if ((documentoCliente.Length == 8) ||(documentoCliente.Length == 7))
                             {
-                                if (CedulaEsValida(Convert.ToInt32(documento)))
+                                if (CedulaEsValida(Convert.ToInt32(documentoCliente)))
                                 {
-                                    cliente.cedula_Rut = Convert.ToInt32(documento);
+                                    cliente.cedula_Rut = Convert.ToInt32(documentoCliente);
                                     documentoValido = true;
                                 }
                                 else
@@ -136,9 +134,9 @@ namespace Practico_Obligatorio
                                     throw new Exception();
                                 }
                             }
-                            else if (documento.Length == 12)
+                            else if (documentoCliente.Length == 12)
                             {
-                                cliente.cedula_Rut = Convert.ToInt32(documento);
+                                cliente.cedula_Rut = Convert.ToInt32(documentoCliente);
                                 documentoValido = true;
                             }
                             else

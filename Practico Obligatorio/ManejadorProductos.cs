@@ -183,6 +183,11 @@ namespace Practico_Obligatorio
             return Lista_Productos.Find(x => x.codigo_identificacion == Convert.ToInt32(productoValido));
         }
 
+        public Producto StockProducto(string stockValido)
+        {
+            return Lista_Productos.Find(x => x.stock == Convert.ToInt32(stockValido));
+        }
+
         public bool ExistenProductos()
         {
             return Lista_Productos.Count > 0;

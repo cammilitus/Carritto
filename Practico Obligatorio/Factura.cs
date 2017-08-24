@@ -14,12 +14,13 @@ namespace Practico_Obligatorio
         public List <Producto> lista_productos;
         public void imprimirFactura()
         {
-            System.Console.WriteLine("Fecha : " + this.fecha.ToShortDateString());
-            System.Console.WriteLine("Cliente: " + this.cliente.nombre);
-            System.Console.WriteLine("CI o RUT: " + this.cliente.cedula_Rut);
-            System.Console.WriteLine("Monto total: $" + this.calcularMonto());
+            Console.WriteLine("Fecha : " + this.fecha.ToShortDateString());
+            Console.WriteLine("Cliente: " + this.cliente.nombre);
 
-            System.Console.WriteLine();
+            Console.WriteLine("CI o RUT: " + this.cliente.cedula_Rut);
+            Console.WriteLine("Monto total: $" + this.calcularMonto());
+
+            Console.WriteLine();
         }
         public int calcularMonto()
         {
