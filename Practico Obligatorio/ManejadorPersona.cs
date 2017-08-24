@@ -234,6 +234,150 @@ namespace Practico_Obligatorio
             }
         }
 
+        public void AgregarVendedor()
+        {
+            bool ingresarDeNuevo = true;
+            Vendedor vendedor = new Vendedor();
+            while (ingresarDeNuevo)
+            {
+
+                try
+                {
+                    Console.Write("Nombre: ");
+                    var nombre = Console.ReadLine();
+                    int number;
+                    if ((int.TryParse(nombre, out number)) || (nombre == ""))
+                    {
+                        throw new Exception();
+                    }
+                    vendedor.nombre = nombre;
+                    ingresarDeNuevo = false;
+                }
+                catch (Exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("El nombre no puede ser vacio o un numero");
+                    Console.ResetColor();
+                }
+
+            }
+            var documentoValido = false;
+            string documento;
+            while (!documentoValido)
+            {
+                try
+                {
+
+
+                    Console.Write("Cedula o RUT: ");
+                    documento = Console.ReadLine();
+                    if ((documento != "") && (IsDigitsOnly(documento)))
+                    {
+                        var buscarDocumento = Lista_Personas.Find(x => x.cedula_Rut == Convert.ToInt32(documento));
+                        if (buscarDocumento == null)
+                        {
+                            if ((documento.Length == 8) || (documento.Length == 7))
+                            {
+                                if (CedulaEsValida(Convert.ToInt32(documento)))
+                                {
+                                    vendedor.cedula_Rut = Convert.ToInt32(documento);
+                                    documentoValido = true;
+                                }
+                                else
+                                {
+                                    throw new Exception();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+
+                }
+                catch (Exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Formato incorrecto, ingreselo nuevamente" + "\n");
+                    Console.ResetColor();
+                }
+
+            }
+            var telefonoValido = false;
+            string telefono;
+            char[] telefonoArray;
+            while (!telefonoValido)
+            {
+                Console.Write("Telefono: ");
+                telefono = Console.ReadLine();
+                if (telefono != "")
+                {
+                    telefonoArray = telefono.ToCharArray();
+                    for (int i = 0; i < telefono.Length; i++)
+                    {
+                        if ((!Char.IsNumber(telefono[i])) && (!Char.IsWhiteSpace(telefono[i])))
+                        {
+                            Console.WriteLine("Formato incorrecto, ingreselo nuevamente");
+                            break;
+                        }
+
+                        if (i == telefono.Length - 1)
+                        {
+                            telefonoValido = true;
+                            vendedor.telefono = Convert.ToString(telefono);
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Formato incorrecto, ingreselo nuevamente");
+                }
+            }
+            bool fechavalida2 = false;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Ingrese fecha de nacimiento con el formato DD/MM/AAAA");
+                    var today = DateTime.Today;
+                    var fecha_nacimiento = Convert.ToDateTime(Console.ReadLine());
+                    var result = (today - fecha_nacimiento);
+                    if (result.Days >= 6575)
+                    {
+                        vendedor.fecha_Nacimiento = fecha_nacimiento;
+                        fechavalida2 = true;
+
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Error, la fecha de nacimiento no puede ser menor a 18 años." + "\n");
+                        Console.ResetColor();
+                        fechavalida2 = false;
+
+                    }
+
+                }
+                catch (Exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Error, la fecha o el formato no son correctos." + "\n");
+                    Console.ResetColor();
+                    fechavalida2 = false;
+                }
+            } while (!fechavalida2);
+            Lista_Personas.Add(vendedor);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Cliente ingresado exitosamente" + "\n");
+            Console.ResetColor();
+        }
+
+       
         public Persona BuscarCliente(string id)
         {
             return Lista_Personas.Find(x => x.cedula_Rut == Convert.ToInt32(id));
