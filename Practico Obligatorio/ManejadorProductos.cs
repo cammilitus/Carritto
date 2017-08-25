@@ -170,12 +170,84 @@ namespace Practico_Obligatorio
             identificador++;
         }
 
-        public void ListarProductos()
+        public void AltaStock()
         {
             for (int indice = 0; indice < Lista_Productos.Count; indice++)
             {
                 Lista_Productos[indice].imprimirProducto();
             }
+            var ingresarDeNuevo = true;
+            while(ingresarDeNuevo)
+            {
+                try
+                {
+                    Console.WriteLine("Ingrese id para agregar stock o enter para volver al menu");
+                    var productoValido = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(productoValido))
+                    {
+                        ingresarDeNuevo = false;
+                    }
+                    else
+                    {
+                        var productoIngresado = ManejadorProductos.Instance.BuscarProducto(productoValido);
+                        if (productoIngresado == null)
+                        {
+                            throw new Exception();
+                        }
+                        Console.Write("Cantidad del producto ingresado:");
+                        var stockProducto = (Console.ReadLine());
+                        if (IsDigitsOnly(stockProducto))
+                        {
+                            if (Convert.ToInt32(stockProducto) > 0)
+                            {
+                                if (productoIngresado.stock >= Convert.ToInt32(stockProducto))
+                                {
+                                    var stockAComprar = Convert.ToInt32(stockProducto);
+                                    productoIngresado.stock += stockAComprar;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("El stock disponible es " + productoIngresado.stock);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Debe ingresar un entero mayor a cero" + "\n");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Debe ingresar un entero mayor a cero" + "\n");
+                        }
+                    }
+                }
+
+                catch (Exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("El id ingresado no existe" + "\n");
+                    Console.ResetColor();
+                }
+            }
+
+
+        }
+
+        public void InformeStock()
+        {
+            if (ExistenProductos())
+            {
+                for (int indice = 0; indice < Lista_Productos.Count; indice++)
+                {
+                    Lista_Productos[indice].imprimirProducto();
+                }
+            }
+            else
+            {
+                Console.WriteLine("No hay ningun producto registrado");
+            }
+        
         }
 
         public Producto BuscarProducto(string productoValido)

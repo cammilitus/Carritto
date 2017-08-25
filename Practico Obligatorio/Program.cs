@@ -14,7 +14,7 @@ namespace Practico_Obligatorio
             while (programaCorriendo)
             {
                // Sistema.Ingresocontrasenia();
-                Sistema.Instance.CrearAdmin();
+                Sistema.Instance.CrearAdmin();                
                 Sistema.Instance.MenuPrincipal();
                 opcionMenu = Console.ReadLine();
                 var opcionChar = opcionMenu.ToCharArray();
@@ -24,25 +24,33 @@ namespace Practico_Obligatorio
                     {
                         //Menu de registro
                         case 1:
+                        
                         Sistema.Instance.MenuRegistroAdmin();
                         opcionMenu = Console.ReadLine();
                         var opcionChar1 = opcionMenu.ToCharArray();
                         if ((opcionMenu != "") && (Char.IsNumber(opcionChar1[0])))
                         {
-                                switch (Convert.ToInt32(opcionMenu))
-                                {
-                                    //registrar Cliente
-                                    case 1:
-                                        Sistema.Instance.AgregarCliente();                                   
-                                        break;
-                                    case 2:
-                                        //Ingreso de factura
-                                        Sistema.Instance.AgregarFactura();
-                                        break;
-                                    case 3:
-                                        Sistema.Instance.AgregarProducto();
-                                        break;
-                                }
+                            switch (Convert.ToInt32(opcionMenu))
+                            {
+                                case 1:
+                                    Sistema.Instance.AgregarVendedor();
+                                    break;           
+                                case 2:
+                                    Sistema.Instance.AgregarCliente();                                   
+                                    break;
+                                case 3:                                        
+                                    Sistema.Instance.AgregarFactura();
+                                    break;
+                                case 4:
+                                    Sistema.Instance.AgregarProducto();
+                                    break;
+                                case 5:
+                                    Sistema.Instance.AltaStock();
+                                    break;
+                                case 6:
+                                        
+                                    break;
+                            }
                                
                         }
                             break;
@@ -58,9 +66,8 @@ namespace Practico_Obligatorio
                                     Sistema.Instance.ListarFacturas();
                                     break;
                                 case 3:
-                                    Sistema.Instance.ListarProductos();
+                                    Sistema.Instance.InformeStock();
                                     break;
-
                             }
                             break;
                         default:

@@ -15,13 +15,12 @@ namespace Practico_Obligatorio
         public int stock;
         public void imprimirProducto()
         {
-            System.Console.WriteLine("Nombre : " + this.nombre);
-            System.Console.WriteLine("Marca: " + this.marca);
-            System.Console.WriteLine("Id: " + this.codigo_identificacion);
-            System.Console.WriteLine("Precio: $" + this.precio);
+            Console.WriteLine("Nombre : " + this.nombre);
+            Console.WriteLine("Marca: " + this.marca);
+            Console.WriteLine("Id: " + this.codigo_identificacion);
+            Console.WriteLine("Precio: $" + this.precio);
+            Console.WriteLine("Stock: " + this.stock);
 
-
-            System.Console.WriteLine();
         }
     }
 }

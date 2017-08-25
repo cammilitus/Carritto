@@ -65,6 +65,7 @@ namespace Practico_Obligatorio
 
         public void MenuPrincipal()
         {
+            Console.Clear();
             Console.WriteLine("1. Menu de registro ");
             Console.WriteLine("2. Menu de listado" + "\n");
         }
@@ -97,15 +98,19 @@ namespace Practico_Obligatorio
             Console.WriteLine("\n" + "Menu de Listado:" + "\n");
             Console.WriteLine("1.Listar Clientes ");
             Console.WriteLine("2.Listar Facturas");
-            Console.WriteLine("3.Listar Productos" + "\n");
-            Console.WriteLine("4.Informe de Stock");
-            Console.WriteLine("5.Listar Personas");
+            Console.WriteLine("3.Informe de Stock");
+            Console.WriteLine("4.Listar Personas");
         }
 
         //Metodos de Clientes
         public void AgregarCliente()
         {
             ManejadorPersona.Instance.AgregarCliente();
+        }
+
+        public void AgregarVendedor()
+        {
+            ManejadorPersona.Instance.AgregarVendedor();
         }
         
         public void ListarCLientes()
@@ -158,12 +163,16 @@ namespace Practico_Obligatorio
         {
             ManejadorProductos.Instance.AgregarProducto();
         }
+        public void InformeStock()
+        {
+            ManejadorProductos.Instance.InformeStock();
+        }
 
-        public void ListarProductos()
+        public void AltaStock()
         {
             if (ManejadorProductos.Instance.ExistenProductos())
             {
-                ManejadorProductos.Instance.ListarProductos();
+                ManejadorProductos.Instance.AltaStock();
             }
             else
             {
