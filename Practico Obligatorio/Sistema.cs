@@ -87,8 +87,8 @@ namespace Practico_Obligatorio
             Console.Clear();
             Console.WriteLine("\n" + "Menu de registro:" + "\n");            
             Console.WriteLine("1.Registrar Factura ");
-            Console.WriteLine("2.Registrar Producto" + "\n"); 
-            Console.WriteLine("2.Alta de Stock");
+            Console.WriteLine("2.Registrar Producto"); 
+            Console.WriteLine("3.Alta de Stock");
             Console.WriteLine("4.Salir");
         }
 
@@ -125,6 +125,11 @@ namespace Practico_Obligatorio
                 Console.WriteLine("No hay ningun Cliente registrado en el sistema" + "\n");
                 Console.ResetColor();
             }
+        }
+
+        public void ListarPersonas()
+        {
+            ManejadorPersona.Instance.ImprimirPersonas();
         }
 
         //Metodos de Facturas

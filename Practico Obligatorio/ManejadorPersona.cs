@@ -229,6 +229,7 @@ namespace Practico_Obligatorio
             for (int indice = 0; indice < Lista_Personas.Count; indice++)
             {
                 Lista_Personas[indice].ImprimirPersona();
+                Lista_Personas.OrderBy(x => x.cedula_Rut);
             }
         }
 

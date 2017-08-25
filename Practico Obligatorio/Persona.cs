@@ -14,7 +14,7 @@ namespace Practico_Obligatorio
 
         public virtual void ImprimirPersona()
         {
-
+            
         }
     }
 

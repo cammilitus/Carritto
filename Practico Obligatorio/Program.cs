@@ -23,36 +23,35 @@ namespace Practico_Obligatorio
                     switch (Convert.ToInt32(opcionMenu))
                     {
                         //Menu de registro
-                        case 1:
-                        
-                        Sistema.Instance.MenuRegistroAdmin();
-                        opcionMenu = Console.ReadLine();
-                        var opcionChar1 = opcionMenu.ToCharArray();
-                        if ((opcionMenu != "") && (Char.IsNumber(opcionChar1[0])))
-                        {
-                            switch (Convert.ToInt32(opcionMenu))
+                        case 1:                        
+                            Sistema.Instance.MenuRegistroAdmin();
+                            opcionMenu = Console.ReadLine();
+                            var opcionChar1 = opcionMenu.ToCharArray();
+                            if ((opcionMenu != "") && (Char.IsNumber(opcionChar1[0])))
                             {
-                                case 1:
-                                    Sistema.Instance.AgregarVendedor();
-                                    break;           
-                                case 2:
-                                    Sistema.Instance.AgregarCliente();                                   
-                                    break;
-                                case 3:                                        
-                                    Sistema.Instance.AgregarFactura();
-                                    break;
-                                case 4:
-                                    Sistema.Instance.AgregarProducto();
-                                    break;
-                                case 5:
-                                    Sistema.Instance.AltaStock();
-                                    break;
-                                case 6:
+                                switch (Convert.ToInt32(opcionMenu))
+                                {
+                                    case 1:
+                                        Sistema.Instance.AgregarVendedor();
+                                        break;           
+                                    case 2:
+                                        Sistema.Instance.AgregarCliente();                                   
+                                        break;
+                                    case 3:                                        
+                                        Sistema.Instance.AgregarFactura();
+                                        break;
+                                    case 4:
+                                        Sistema.Instance.AgregarProducto();
+                                        break;
+                                    case 5:
+                                        Sistema.Instance.AltaStock();
+                                        break;
+                                    case 6:
                                         
-                                    break;
-                            }
+                                        break;
+                                }
                                
-                        }
+                            }
                             break;
                         case 2:
                             Sistema.Instance.MenuListar();
@@ -67,6 +66,9 @@ namespace Practico_Obligatorio
                                     break;
                                 case 3:
                                     Sistema.Instance.InformeStock();
+                                    break;
+                                case 4:
+                                    Sistema.Instance.ListarPersonas();
                                     break;
                             }
                             break;
