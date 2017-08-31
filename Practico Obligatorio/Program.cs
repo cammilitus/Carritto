@@ -12,9 +12,18 @@ namespace Practico_Obligatorio
             var programaCorriendo = true;    
             string opcionMenu;            
             while (programaCorriendo)
-            {
-               // Sistema.Ingresocontrasenia();
-                Sistema.Instance.CrearAdmin();                
+            {              
+                Sistema.Instance.CrearAdmin();
+
+                if(ManejadorPersona.Instance.nombreUsuarioLogueado == "")
+                {
+                    var ingresarDeNuevo = true;
+                    while (ingresarDeNuevo)
+                    {                        
+                        ingresarDeNuevo = Sistema.Instance.Login();
+                    }
+                }              
+                
                 Sistema.Instance.MenuPrincipal();
                 opcionMenu = Console.ReadLine();
                 var opcionChar = opcionMenu.ToCharArray();
@@ -24,7 +33,7 @@ namespace Practico_Obligatorio
                     {
                         //Menu de registro
                         case 1:                        
-                            Sistema.Instance.MenuRegistroAdmin();
+                            Sistema.Instance.MenuRegistro();
                             opcionMenu = Console.ReadLine();
                             var opcionChar1 = opcionMenu.ToCharArray();
                             if ((opcionMenu != "") && (Char.IsNumber(opcionChar1[0])))
@@ -32,28 +41,35 @@ namespace Practico_Obligatorio
                                 switch (Convert.ToInt32(opcionMenu))
                                 {
                                     case 1:
-                                        Sistema.Instance.AgregarVendedor();
-                                        break;           
-                                    case 2:
-                                        Sistema.Instance.AgregarCliente();                                   
+                                        Sistema.Instance.Logout();
                                         break;
-                                    case 3:                                        
+                                    case 2:                                        
                                         Sistema.Instance.AgregarFactura();
                                         break;
-                                    case 4:
+                                    case 3:
                                         Sistema.Instance.AgregarProducto();
                                         break;
-                                    case 5:
+                                    case 4:
                                         Sistema.Instance.AltaStock();
                                         break;
-                                    case 6:
-                                        
+                                    case 5:
+                                        if (ManejadorPersona.Instance.esAdmin)
+                                        {
+                                            Sistema.Instance.AgregarVendedor();
+                                        }
                                         break;
+                                    case 6:
+                                        if (ManejadorPersona.Instance.esAdmin)
+                                        {
+                                            Sistema.Instance.AgregarCliente();
+                                        }
+                                        break;                                   
                                 }
                                
                             }
                             break;
                         case 2:
+                            //Menu de listado
                             Sistema.Instance.MenuListar();
                             opcionMenu = Console.ReadLine();
                             switch(Convert.ToInt32(opcionMenu))

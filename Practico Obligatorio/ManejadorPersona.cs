@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Practico_Obligatorio
 {
@@ -11,6 +12,8 @@ namespace Practico_Obligatorio
         private static ManejadorPersona instance;
         private List<Persona> Lista_Personas = new List<Persona>();      
         private ManejadorPersona() { }
+        public string nombreUsuarioLogueado = "";
+        public bool esAdmin = false;
         public static ManejadorPersona Instance
         {
             get
@@ -22,7 +25,15 @@ namespace Practico_Obligatorio
                 return instance;
             }
         }
-        
+        public bool ExisteNombreUsuario(Persona persona, string usuario)
+        {
+            Vendedor vendedor = (Vendedor)persona;
+            if ((persona.GetType() == typeof(Vendedor)) && (vendedor.usuario == usuario))
+            {
+                return true;
+            }
+            return false;
+        }
         bool IsDigitsOnly(string str)
         {
             foreach (char c in str)
@@ -32,6 +43,50 @@ namespace Practico_Obligatorio
             }
 
             return true;
+        }
+
+        public string LeerContrasenia()
+        {
+            string contenido = "";
+            char ingreso;
+            Console.WriteLine();
+            do
+            {
+                ingreso = Console.ReadKey().KeyChar;
+                if (ingreso != '\b' && (int)ingreso != 13)
+                {
+                    Console.Write("\b");
+                    Console.Write("*");
+                    contenido += ingreso;
+                }
+                else
+                {
+                    if (ingreso == '\b' && contenido.Length > 0)
+                    {
+                        Console.Write(" ");
+                        Console.Write("\b");
+                        contenido = contenido.Substring(0, contenido.Length - 1);
+                    }
+                }
+
+            } while ((int)ingreso != 13);
+            Console.WriteLine();
+
+            return contenido;
+        }
+
+        public bool VerificarContrasenia(string contraseña)
+        {
+            Regex patronNumerico = new Regex("[0-9]");
+            Regex patronAlfabeticoMay = new Regex("[A-Z]");
+            Regex patronAlfabeticoMin = new Regex("[a-z]");
+            Regex patronSimbolos = new Regex("[^A-Za-z0-9]");
+            if (contraseña.Length >= 8)
+            {
+                return (patronAlfabeticoMay.IsMatch(contraseña) && patronAlfabeticoMin.IsMatch(contraseña) && patronNumerico.IsMatch(contraseña) && patronSimbolos.IsMatch(contraseña));
+            }
+            else
+                return false;
         }
 
         public bool CedulaEsValida(int cedula)
@@ -82,6 +137,29 @@ namespace Practico_Obligatorio
             return numero[7] == guion;
         }
 
+        public bool LoginUsuario()
+        {
+            Console.Write("Ingrese usuario: ");
+            var usuario = Console.ReadLine();
+            Console.Write("Ingrese contraseña");
+            var contrasenia = LeerContrasenia();
+            var buscarUsusario = Lista_Personas.Find(x => ExisteNombreUsuario(x, usuario));
+            if((buscarUsusario != null) && (((Vendedor)buscarUsusario).contrasenia == contrasenia))
+            {
+                nombreUsuarioLogueado = ((Vendedor)buscarUsusario).usuario;
+                esAdmin = ((Vendedor)Lista_Personas[0]).usuario == usuario;
+                return false;
+            }
+
+            return true;            
+        }
+
+        public void Logout()
+        {
+            nombreUsuarioLogueado = "";
+            esAdmin = false;
+        }
+
         public void AgregarCliente()
         {
             bool ingresarDeNuevo = true;
@@ -109,9 +187,9 @@ namespace Practico_Obligatorio
                 }
 
             }
-            var documentoValido = false;
+            ingresarDeNuevo = false;
             string documentoCliente;
-            while (!documentoValido)
+            while (ingresarDeNuevo)
             {
                 try
                 {
@@ -127,7 +205,7 @@ namespace Practico_Obligatorio
                                 if (CedulaEsValida(Convert.ToInt32(documentoCliente)))
                                 {
                                     cliente.cedula_Rut = Convert.ToInt32(documentoCliente);
-                                    documentoValido = true;
+                                    ingresarDeNuevo = false;
                                 }
                                 else
                                 {
@@ -137,7 +215,7 @@ namespace Practico_Obligatorio
                             else if (documentoCliente.Length == 12)
                             {
                                 cliente.cedula_Rut = Convert.ToInt32(documentoCliente);
-                                documentoValido = true;
+                                ingresarDeNuevo = false;
                             }
                             else
                             {
@@ -185,7 +263,7 @@ namespace Practico_Obligatorio
                     Console.ResetColor();
                 }
             }
-            bool fechavalida2 = false;
+            ingresarDeNuevo = true;
             do
             {
                 try
@@ -197,15 +275,14 @@ namespace Practico_Obligatorio
                     if (result.Days >= 6575)
                     {
                         cliente.fecha_Nacimiento = fecha_nacimiento;
-                        fechavalida2 = true;
+                        ingresarDeNuevo = false;
 
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Error, la fecha de nacimiento no puede ser menor a 18 años." + "\n");
-                        Console.ResetColor();
-                        fechavalida2 = false;
+                        Console.ResetColor();                       
 
                     }
 
@@ -215,9 +292,9 @@ namespace Practico_Obligatorio
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Error, la fecha o el formato no son correctos." + "\n");
                     Console.ResetColor();
-                    fechavalida2 = false;
+                   
                 }
-            } while (!fechavalida2);
+            } while (ingresarDeNuevo);
             Lista_Personas.Add(cliente);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Cliente ingresado exitosamente" + "\n");
@@ -260,15 +337,13 @@ namespace Practico_Obligatorio
                 }
 
             }
-            var documentoValido = false;
+            ingresarDeNuevo = true;
             string documento;
-            while (!documentoValido)
-            {
+            while (ingresarDeNuevo)
+            {                
                 try
                 {
-
-
-                    Console.Write("Cedula o RUT: ");
+                    Console.Write("Cedula: ");
                     documento = Console.ReadLine();
                     if ((documento != "") && (IsDigitsOnly(documento)))
                     {
@@ -280,7 +355,7 @@ namespace Practico_Obligatorio
                                 if (CedulaEsValida(Convert.ToInt32(documento)))
                                 {
                                     vendedor.cedula_Rut = Convert.ToInt32(documento);
-                                    documentoValido = true;
+                                    ingresarDeNuevo = false;
                                 }
                                 else
                                 {
@@ -307,10 +382,10 @@ namespace Practico_Obligatorio
                 }
 
             }
-            var telefonoValido = false;
+            ingresarDeNuevo = true;
             string telefono;
             char[] telefonoArray;
-            while (!telefonoValido)
+            while (ingresarDeNuevo)
             {
                 Console.Write("Telefono: ");
                 telefono = Console.ReadLine();
@@ -327,7 +402,7 @@ namespace Practico_Obligatorio
 
                         if (i == telefono.Length - 1)
                         {
-                            telefonoValido = true;
+                            ingresarDeNuevo = false;
                             vendedor.telefono = Convert.ToString(telefono);
                         }
                     }
@@ -337,7 +412,7 @@ namespace Practico_Obligatorio
                     Console.WriteLine("Formato incorrecto, ingreselo nuevamente");
                 }
             }
-            bool fechavalida2 = false;
+            ingresarDeNuevo = true;
             do
             {
                 try
@@ -349,15 +424,14 @@ namespace Practico_Obligatorio
                     if (result.Days >= 6575)
                     {
                         vendedor.fecha_Nacimiento = fecha_nacimiento;
-                        fechavalida2 = true;
+                        ingresarDeNuevo = false;
 
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Error, la fecha de nacimiento no puede ser menor a 18 años." + "\n");
-                        Console.ResetColor();
-                        fechavalida2 = false;
+                        Console.ResetColor();                       
 
                     }
 
@@ -366,13 +440,83 @@ namespace Practico_Obligatorio
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Error, la fecha o el formato no son correctos." + "\n");
-                    Console.ResetColor();
-                    fechavalida2 = false;
+                    Console.ResetColor();                    
                 }
-            } while (!fechavalida2);
+            } while (ingresarDeNuevo);
+
+            ingresarDeNuevo = true;
+            while (ingresarDeNuevo)
+            {
+                try
+                {
+                    Console.Write("Nombre de usuario : ");
+                    var nombreusuario = Console.ReadLine();
+                    int number;
+                    if ((int.TryParse(nombreusuario, out number)) || (nombreusuario == ""))
+                    {
+                        throw new Exception();
+                    }
+                    var buscarUsusario = Lista_Personas.Find(x => ExisteNombreUsuario(x,nombreusuario));
+                    if (buscarUsusario == null)
+                    {
+                        vendedor.usuario = nombreusuario;
+                        ingresarDeNuevo = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("El usuario elegido ya existe, ingrese nuevamente");
+                    }
+
+                }
+                catch (Exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("El nombre no puede ser vacio o un numero");
+                    Console.ResetColor();
+                }
+                                
+                ingresarDeNuevo = true;
+                while (ingresarDeNuevo)
+                {
+                    try
+                    {
+                        Console.WriteLine("Ingrese Contraseña:");
+                        var contrasenia = LeerContrasenia();
+                        if (VerificarContrasenia(contrasenia))
+                        {
+                            Console.Write("Confirmar constraseña : ");
+                            var confirmarContrasenia = LeerContrasenia();
+                            if (contrasenia == confirmarContrasenia)
+                            {
+                                vendedor.contrasenia = contrasenia;
+                                ingresarDeNuevo = false;
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Las contraseñas no coinciden");
+                                Console.ResetColor();
+                                
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+                    }
+                    catch
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Formato incorrecto la contrasenia debe incluir al menos una mayuscula, una minuscula, un numero, un simbolo y un largo de al menos 8 caracteres");
+                        Console.ResetColor();
+                    }
+                }
+
+
+            }
             Lista_Personas.Add(vendedor);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Cliente ingresado exitosamente" + "\n");
+            Console.WriteLine("Vendedor ingresado exitosamente" + "\n");
             Console.ResetColor();
         }
 
@@ -402,7 +546,8 @@ namespace Practico_Obligatorio
             admin.cedula_Rut = 53927851;
             admin.telefono = "12345678";
             //admin.fecha_Nacimiento = Convert.ToDateTime(12 / 12 / 98); me tira excepcion
-            admin.contraseña = "Contra$en4";
+            admin.usuario = "admin";
+            admin.contrasenia = "Contra$en4";
             Lista_Personas.Add(admin);
         }
     }

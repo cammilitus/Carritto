@@ -9,13 +9,15 @@ namespace Practico_Obligatorio
     class Vendedor : Persona
     {
         public string telefono { get; set; }
-        public string contraseña { get; set; }
+        public string usuario { get; set; }
+        public string contrasenia { get; set; }
 
         public override void ImprimirPersona()
         {
             Console.WriteLine("Nombre: " + this.nombre);
             Console.WriteLine("CI o RUT" + this.cedula_Rut);
             Console.WriteLine("Telefono " + this.telefono);
+           
         }
     }
 }

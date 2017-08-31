@@ -27,70 +27,44 @@ namespace Practico_Obligatorio
             ManejadorPersona.Instance.CrearAdmin();
         }
 
-        public static string Ingresocontrasenia()
-        {
-            Console.WriteLine("Ingrese Usuario:");
-            string usuario = Console.ReadLine();
-            Console.WriteLine("Ingrese Contraseña:");
-            string contrasenia = "";
-            ConsoleKeyInfo info = Console.ReadKey(true);
-            while (info.Key != ConsoleKey.Enter)
-            {
-                if (info.Key != ConsoleKey.Backspace)
-                {
-                    contrasenia += info.KeyChar;
-                    info = Console.ReadKey(true);
-                }
-                else if (info.Key == ConsoleKey.Backspace)
-                {
-                    if (!string.IsNullOrEmpty(contrasenia))
-                    {
-                        contrasenia = contrasenia.Substring
-                        (0, contrasenia.Length - 1);
-                    }
-                    info = Console.ReadKey(true);
-                }
-            }
-            for (int i = 0; i < contrasenia.Length; i++)
-                Console.Write("*");
-            return contrasenia;
-        }
-        //ImpresionMenu
-        public void MenuLoginAdmin()
+        //Login
+        public bool Login()
         {
             Console.Clear();
-            Console.WriteLine("Bienvenido a Carritto" );
-            Console.Write("Ingrese usuario:");
-        }    
+            Console.WriteLine("Bienvenido a Carritto");
+            return ManejadorPersona.Instance.LoginUsuario();
+        }   
+
+        public void Logout()
+        {
+            ManejadorPersona.Instance.Logout();
+        }
+                
+        //ImpresionMenu      
 
         public void MenuPrincipal()
         {
-            Console.Clear();
+            
             Console.WriteLine("1. Menu de registro ");
             Console.WriteLine("2. Menu de listado" + "\n");
         }
 
-        public void MenuRegistroAdmin()
+        public void MenuRegistro()
         {
             Console.Clear();
             Console.WriteLine("Menu de registro:");
-            Console.WriteLine("1.Registrar Vendedor ");
-            Console.WriteLine("2.Registrar Cliente ");
-            Console.WriteLine("3.Registrar Factura ");
-            Console.WriteLine("4.Registrar Producto"); 
-            Console.WriteLine("5.Alta de Stock");
-            Console.WriteLine("6.Salir");
+            Console.WriteLine("1.Salir" + "\n");
+            Console.WriteLine("2.Registrar Factura ");
+            Console.WriteLine("3.Registrar Producto"); 
+            Console.WriteLine("4.Alta de Stock");
+            if (ManejadorPersona.Instance.esAdmin)
+            {
+                Console.WriteLine("5.Registrar Vendedor ");
+                Console.WriteLine("6.Registrar Cliente ");
+            }
         }
 
-        public void MenuRegistroVendedor()
-        {
-            Console.Clear();
-            Console.WriteLine("\n" + "Menu de registro:" + "\n");            
-            Console.WriteLine("1.Registrar Factura ");
-            Console.WriteLine("2.Registrar Producto"); 
-            Console.WriteLine("3.Alta de Stock");
-            Console.WriteLine("4.Salir");
-        }
+        
 
         public void MenuListar()
         {
