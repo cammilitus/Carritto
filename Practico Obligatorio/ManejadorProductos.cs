@@ -157,8 +157,6 @@ namespace Practico_Obligatorio
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("La cantidad de stock tiene que ser un entero positivo" + "\n");
                     Console.ResetColor();
-
-
                 }
 
             }
@@ -176,6 +174,7 @@ namespace Practico_Obligatorio
             {
                 Lista_Productos[indice].imprimirProducto();
             }
+
             var ingresarDeNuevo = true;
             while(ingresarDeNuevo)
             {
@@ -201,15 +200,8 @@ namespace Practico_Obligatorio
                         {
                             if (Convert.ToInt32(stockProducto) > 0)
                             {
-                                if (productoIngresado.stock >= Convert.ToInt32(stockProducto))
-                                {
-                                    var stockAComprar = Convert.ToInt32(stockProducto);
-                                    productoIngresado.stock += stockAComprar;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("El stock disponible es " + productoIngresado.stock);
-                                }
+                                var stockAComprar = Convert.ToInt32(stockProducto);
+                                productoIngresado.stock += stockAComprar;
                             }
                             else
                             {
@@ -230,8 +222,6 @@ namespace Practico_Obligatorio
                     Console.ResetColor();
                 }
             }
-
-
         }
 
         public void InformeStock()

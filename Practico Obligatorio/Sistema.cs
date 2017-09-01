@@ -40,20 +40,19 @@ namespace Practico_Obligatorio
             ManejadorPersona.Instance.Logout();
         }
                 
-        //ImpresionMenu      
-
+        //ImpresionMenu
         public void MenuPrincipal()
-        {
-            
+        {            
             Console.WriteLine("1. Menu de registro ");
-            Console.WriteLine("2. Menu de listado" + "\n");
+            Console.WriteLine("2. Menu de listado");
+            Console.WriteLine("3. Salir");
         }
 
         public void MenuRegistro()
         {
             Console.Clear();
             Console.WriteLine("Menu de registro:");
-            Console.WriteLine("1.Salir" + "\n");
+            Console.WriteLine("1.Salir");
             Console.WriteLine("2.Registrar Factura ");
             Console.WriteLine("3.Registrar Producto"); 
             Console.WriteLine("4.Alta de Stock");
@@ -62,9 +61,7 @@ namespace Practico_Obligatorio
                 Console.WriteLine("5.Registrar Vendedor ");
                 Console.WriteLine("6.Registrar Cliente ");
             }
-        }
-
-        
+        }        
 
         public void MenuListar()
         {

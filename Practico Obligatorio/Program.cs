@@ -88,6 +88,9 @@ namespace Practico_Obligatorio
                                     break;
                             }
                             break;
+                        case 3:
+                            Sistema.Instance.Logout();
+                            break;
                         default:
                             Console.WriteLine("Debe ingresar 1 para menu de registro o 2 para menu de listado");
                             break;

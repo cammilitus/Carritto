@@ -17,7 +17,8 @@ namespace Practico_Obligatorio
             Console.WriteLine("Nombre: " + this.nombre);
             Console.WriteLine("CI o RUT" + this.cedula_Rut);
             Console.WriteLine("Telefono " + this.telefono);
-           
+            Console.WriteLine("");
+
         }
     }
 }

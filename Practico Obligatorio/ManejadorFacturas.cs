@@ -160,7 +160,7 @@ namespace Practico_Obligatorio
                 }
             }
 
-            
+            factura.usuarioLogueado = ManejadorPersona.Instance.nombreUsuarioLogueado;
             Lista_Facturas.Add(factura);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Factura ingresada exitosamente" + "\n");
