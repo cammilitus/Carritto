@@ -8,7 +8,7 @@ namespace Practico_Obligatorio
 {
     class Sistema
     {
-        private static Sistema instance;        
+        private static Sistema instance;
         private Sistema() { }
         public static Sistema Instance
         {
@@ -22,41 +22,74 @@ namespace Practico_Obligatorio
             }
         }
 
+        public void CrearAdmin()
+        {
+            ManejadorPersona.Instance.CrearAdmin();
+        }
+
+        //Login
+        public bool Login()
+        {
+            Console.Clear();
+            Console.WriteLine("Bienvenido a Carritto");
+            return ManejadorPersona.Instance.LoginUsuario();
+        }   
+
+        public void Logout()
+        {
+            ManejadorPersona.Instance.Logout();
+        }
+                
         //ImpresionMenu
         public void MenuPrincipal()
         {
-            Console.WriteLine("\n" + "Programa de Facturacion" + "\n");
+            Console.Clear();
             Console.WriteLine("1. Menu de registro ");
-            Console.WriteLine("2. Menu de listado" + "\n");
+            Console.WriteLine("2. Menu de listado");
+            Console.WriteLine("3. Salir");
         }
 
         public void MenuRegistro()
         {
-            Console.WriteLine("\n" + "Menu de registro:" + "\n");
-            Console.WriteLine("1.Registrar Cliente ");
+            Console.Clear();
+            Console.WriteLine("Menu de registro:");
+            Console.WriteLine("1.Salir");
             Console.WriteLine("2.Registrar Factura ");
-            Console.WriteLine("3.Registrar Producto" + "\n");            
-        }
+            Console.WriteLine("3.Registrar Producto"); 
+            Console.WriteLine("4.Alta de Stock");
+            if (ManejadorPersona.Instance.esAdmin)
+            {
+                Console.WriteLine("5.Registrar Vendedor ");
+                Console.WriteLine("6.Registrar Cliente ");
+            }
+        }        
 
         public void MenuListar()
         {
+            Console.Clear();
             Console.WriteLine("\n" + "Menu de Listado:" + "\n");
             Console.WriteLine("1.Listar Clientes ");
             Console.WriteLine("2.Listar Facturas");
-            Console.WriteLine("3.Listar Productos" + "\n");
+            Console.WriteLine("3.Informe de Stock");
+            Console.WriteLine("4.Listar Personas");
         }
 
         //Metodos de Clientes
         public void AgregarCliente()
         {
-            ManejadorCliente.Instance.AgregarCliente();
+            ManejadorPersona.Instance.AgregarCliente();
+        }
+
+        public void AgregarVendedor()
+        {
+            ManejadorPersona.Instance.AgregarVendedor();
         }
         
         public void ListarCLientes()
         {
-            if (ManejadorCliente.Instance.ExistenClientes())
+            if (ManejadorPersona.Instance.ExistenClientes())
             {
-                ManejadorCliente.Instance.ImprimirClientes();
+                ManejadorPersona.Instance.ImprimirPersonas();
             }
             else
             {
@@ -66,10 +99,15 @@ namespace Practico_Obligatorio
             }
         }
 
+        public void ListarPersonas()
+        {
+            ManejadorPersona.Instance.ImprimirPersonas();
+        }
+
         //Metodos de Facturas
         public void AgregarFactura()
         {
-            if (ManejadorCliente.Instance.ExistenClientes() && ManejadorProductos.Instance.ExistenProductos())
+            if ((ManejadorPersona.Instance.ExistenClientes()) && (ManejadorProductos.Instance.ExistenProductos()))
             {
                 ManejadorFacturas.Instance.AgregarFactura();
             }
@@ -102,12 +140,16 @@ namespace Practico_Obligatorio
         {
             ManejadorProductos.Instance.AgregarProducto();
         }
+        public void InformeStock()
+        {
+            ManejadorProductos.Instance.InformeStock();
+        }
 
-        public void ListarProductos()
+        public void AltaStock()
         {
             if (ManejadorProductos.Instance.ExistenProductos())
             {
-                ManejadorProductos.Instance.ListarProductos();
+                ManejadorProductos.Instance.AltaStock();
             }
             else
             {

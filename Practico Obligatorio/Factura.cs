@@ -9,17 +9,18 @@ namespace Practico_Obligatorio
     class Factura
     {
         public DateTime fecha;
-        public Cliente cliente;
+        public Persona cliente;
+        public string usuarioLogueado;
         public List<int> listaCantidadProducto;
         public List <Producto> lista_productos;
         public void imprimirFactura()
         {
-            System.Console.WriteLine("Fecha : " + this.fecha.ToShortDateString());
-            System.Console.WriteLine("Cliente: " + this.cliente.nombre);
-            System.Console.WriteLine("CI o RUT: " + this.cliente.cedula_Rut);
-            System.Console.WriteLine("Monto total: $" + this.calcularMonto());
-
-            System.Console.WriteLine();
+            Console.WriteLine("Fecha : " + this.fecha.ToShortDateString());
+            Console.WriteLine("Cliente: " + this.cliente.nombre);
+            Console.WriteLine("CI o RUT: " + this.cliente.cedula_Rut);          
+            Console.WriteLine("Vendedor: " + this.usuarioLogueado);
+            Console.WriteLine("Monto total: $" + this.calcularMonto());
+            Console.WriteLine();
         }
         public int calcularMonto()
         {

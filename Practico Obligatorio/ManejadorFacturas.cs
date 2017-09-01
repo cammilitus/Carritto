@@ -56,6 +56,7 @@ namespace Practico_Obligatorio
                     fechavalida = false;
                 }
             } while (!fechavalida);
+
             Console.WriteLine("Ingrese CI o RUT : ");
             bool ingresarDeNuevo = true;
             while (ingresarDeNuevo)
@@ -65,12 +66,13 @@ namespace Practico_Obligatorio
                 {
                     if ((id != "") && (IsDigitsOnly(id)))
                     {
-                        var usarCI = ManejadorCliente.Instance.BuscarCliente(id);
+                        var usarCI = ManejadorPersona.Instance.BuscarCliente(id);
                         if (usarCI == null)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("El cliente de CI o RUT " + id + " no existe \n");
                             Console.ResetColor();
+                            ingresarDeNuevo = true;
                         }
                         else
                         {
@@ -89,68 +91,83 @@ namespace Practico_Obligatorio
                     Console.WriteLine("Formato incorrecto");
                     Console.ResetColor();
                 }
-                var esPrimerProducto = true;
-                ingresarDeNuevo = true;
+            }
 
 
+            var esPrimerProducto = true;
+            ingresarDeNuevo = true;
+            while (ingresarDeNuevo)
+            {
+                Console.Write("Ingrese id del producto o enter para finalizar:");
 
-                while (ingresarDeNuevo)
+                var productoValido = Console.ReadLine();
+                try
                 {
-                    Console.Write("Ingrese id del producto o enter para finalizar:");
-
-                    var productoValido = Console.ReadLine();
-                    try
+                    if ((!esPrimerProducto) && (string.IsNullOrEmpty(productoValido)))
                     {
-                        if ((!esPrimerProducto) && (string.IsNullOrEmpty(productoValido)))
+                        ingresarDeNuevo = false;
+                    }
+                    else
+                    {
+                        var productoIngresado = ManejadorProductos.Instance.BuscarProducto(productoValido);
+                        if (productoIngresado == null)
                         {
-                            ingresarDeNuevo = false;
+                            throw new Exception();
                         }
                         else
                         {
-                            var productoIngresado = ManejadorProductos.Instance.BuscarProducto(productoValido);
-                            if (productoIngresado == null)
-                            {
-                                throw new Exception();
-                            }
-                            else
-                            {
-                                factura.lista_productos.Add(productoIngresado);
-                                esPrimerProducto = false;
-                            }
                             var ingresarCantidadDeNuevo = true;
                             while (ingresarCantidadDeNuevo)
                             {
                                 Console.Write("Cantidad del producto ingresado:");
-                                var cantidadProducto = (Console.ReadLine());
-                                if (IsDigitsOnly(cantidadProducto))
+                                var stockProducto = (Console.ReadLine());
+                                if (IsDigitsOnly(stockProducto))
                                 {
-                                    factura.listaCantidadProducto.Add(Convert.ToInt32(cantidadProducto));
-                                    ingresarCantidadDeNuevo = false;
+                                    if (Convert.ToInt32(stockProducto) > 0)
+                                    {
+                                        if (productoIngresado.stock >= Convert.ToInt32(stockProducto))
+                                        {
+                                            var stockAComprar = Convert.ToInt32(stockProducto);
+                                            factura.listaCantidadProducto.Add(stockAComprar);
+                                            factura.lista_productos.Add(productoIngresado);
+                                            productoIngresado.stock -= stockAComprar;
+                                            ingresarCantidadDeNuevo = false;
+                                            esPrimerProducto = false;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("El stock disponible es " + productoIngresado.stock);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Debe ingresar un entero mayor a cero" + "\n");
+                                    }
                                 }
                                 else
                                 {
                                     Console.WriteLine("Debe ingresar un entero mayor a cero" + "\n");
                                 }
-
                             }
-
                         }
                     }
-                    catch (Exception)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("El id ingresado no existe" + "\n");
-                        Console.ResetColor();
-                    }
                 }
-
+                catch (Exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("El id ingresado no existe" + "\n");
+                    Console.ResetColor();
+                }
             }
+
+            factura.usuarioLogueado = ManejadorPersona.Instance.nombreUsuarioLogueado;
             Lista_Facturas.Add(factura);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Factura ingresada exitosamente" + "\n");
             Console.ResetColor();
         }
 
+       
         public void ImprimirFactura()
         {
             for (int indice = 0; indice < Lista_Facturas.Count; indice++)

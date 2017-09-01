@@ -10,6 +10,7 @@ namespace Practico_Obligatorio
     {
         private static ManejadorProductos instance;
         private List<Producto> Lista_Productos = new List<Producto>();
+        int identificador = 0;
         private ManejadorProductos() { }
         public static ManejadorProductos Instance
         {
@@ -37,7 +38,6 @@ namespace Practico_Obligatorio
 
         public void AgregarProducto()
         {
-            int identificador = 0;
             bool ingresarDeNuevo = true;
             Producto producto = new Producto();
             while (ingresarDeNuevo)
@@ -123,6 +123,43 @@ namespace Practico_Obligatorio
                 }
 
             }
+
+            ingresarDeNuevo = true;
+            while (ingresarDeNuevo)
+            {
+                try
+                {
+                    Console.Write("Stock inicial: ");
+                    var stock = Console.ReadLine();
+                    if (IsDigitsOnly(stock))
+                    {
+                        int stockValido = Convert.ToInt32(stock);
+                        if (stockValido > 0)
+                        {
+                            producto.stock = stockValido;
+                            ingresarDeNuevo = false;
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+                    }
+
+                    else
+                    {
+                        throw new Exception();
+                    }
+
+                    ingresarDeNuevo = false;
+                }
+                catch (Exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("La cantidad de stock tiene que ser un entero positivo" + "\n");
+                    Console.ResetColor();
+                }
+
+            }
             producto.codigo_identificacion = identificador;
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Producto creado con el codigo " + identificador + "\n");
@@ -131,18 +168,82 @@ namespace Practico_Obligatorio
             identificador++;
         }
 
-        public void ListarProductos()
+        public void AltaStock()
         {
             for (int indice = 0; indice < Lista_Productos.Count; indice++)
             {
                 Lista_Productos[indice].imprimirProducto();
             }
+
+            var ingresarDeNuevo = true;
+            while(ingresarDeNuevo)
+            {
+                try
+                {
+                    Console.WriteLine("Ingrese id para agregar stock o enter para volver al menu");
+                    var productoValido = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(productoValido))
+                    {
+                        ingresarDeNuevo = false;
+                    }
+                    else
+                    {
+                        var productoIngresado = ManejadorProductos.Instance.BuscarProducto(productoValido);
+                        if (productoIngresado == null)
+                        {
+                            throw new Exception();
+                        }
+                        Console.Write("Cantidad del producto ingresado:");
+                        var stockProducto = (Console.ReadLine());
+                        if (IsDigitsOnly(stockProducto))
+                        {
+                            if (Convert.ToInt32(stockProducto) > 0)
+                            {
+                                var stockAComprar = Convert.ToInt32(stockProducto);
+                                productoIngresado.stock += stockAComprar;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Debe ingresar un entero mayor a cero" + "\n");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Debe ingresar un entero mayor a cero" + "\n");
+                        }
+                    }
+                }
+
+                catch (Exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("El id ingresado no existe" + "\n");
+                    Console.ResetColor();
+                }
+            }
+        }
+
+        public void InformeStock()
+        {
+            if (ExistenProductos())
+            {
+                for (int indice = 0; indice < Lista_Productos.Count; indice++)
+                {
+                    Lista_Productos[indice].imprimirProducto();
+                }
+            }
+            else
+            {
+                Console.WriteLine("No hay ningun producto registrado");
+            }
+        
         }
 
         public Producto BuscarProducto(string productoValido)
         {
             return Lista_Productos.Find(x => x.codigo_identificacion == Convert.ToInt32(productoValido));
-        }
+        }               
 
         public bool ExistenProductos()
         {

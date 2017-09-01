@@ -22,3 +22,15 @@ C:\Users\Ceibal\Desktop\Practico Obligatorio v1\Practico Obligatorio\bin\Debug\P
 C:\Users\Ceibal\Desktop\Practico Obligatorio v1\Practico Obligatorio\obj\Debug\Practico Obligatorio.csprojResolveAssemblyReference.cache
 C:\Users\Ceibal\Desktop\Practico Obligatorio v1\Practico Obligatorio\obj\Debug\Practico Obligatorio.exe
 C:\Users\Ceibal\Desktop\Practico Obligatorio v1\Practico Obligatorio\obj\Debug\Practico Obligatorio.pdb
+C:\Users\Ceibal\Desktop\Carritto\Carritto\Practico Obligatorio\obj\Debug\Practico Obligatorio.csprojResolveAssemblyReference.cache
+C:\Users\Ceibal\Desktop\Carritto\Carritto\Practico Obligatorio\obj\Debug\Practico Obligatorio.exe
+C:\Users\Ceibal\Desktop\Carritto\Carritto\Practico Obligatorio\obj\Debug\Practico Obligatorio.pdb
+C:\Users\Ceibal\Desktop\Carritto\Carritto\Practico Obligatorio\bin\Debug\Practico Obligatorio.exe.config
+C:\Users\Ceibal\Desktop\Carritto\Carritto\Practico Obligatorio\bin\Debug\Practico Obligatorio.exe
+C:\Users\Ceibal\Desktop\Carritto\Carritto\Practico Obligatorio\bin\Debug\Practico Obligatorio.pdb
+C:\Users\pMalvasio\Downloads\Carritto\Carritto\Carritto\Practico Obligatorio\bin\Debug\Practico Obligatorio.exe.config
+C:\Users\pMalvasio\Downloads\Carritto\Carritto\Carritto\Practico Obligatorio\bin\Debug\Practico Obligatorio.exe
+C:\Users\pMalvasio\Downloads\Carritto\Carritto\Carritto\Practico Obligatorio\bin\Debug\Practico Obligatorio.pdb
+C:\Users\pMalvasio\Downloads\Carritto\Carritto\Carritto\Practico Obligatorio\obj\Debug\Practico Obligatorio.csprojResolveAssemblyReference.cache
+C:\Users\pMalvasio\Downloads\Carritto\Carritto\Carritto\Practico Obligatorio\obj\Debug\Practico Obligatorio.exe
+C:\Users\pMalvasio\Downloads\Carritto\Carritto\Carritto\Practico Obligatorio\obj\Debug\Practico Obligatorio.pdb
