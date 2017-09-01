@@ -42,7 +42,8 @@ namespace Practico_Obligatorio
                 
         //ImpresionMenu
         public void MenuPrincipal()
-        {            
+        {
+            Console.Clear();
             Console.WriteLine("1. Menu de registro ");
             Console.WriteLine("2. Menu de listado");
             Console.WriteLine("3. Salir");

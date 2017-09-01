@@ -179,6 +179,7 @@ namespace Practico_Obligatorio
             {
                 try
                 {
+                    Console.Clear();
                     Console.Write("Nombre: ");
                     var nombre = Console.ReadLine();
                     int number;
@@ -204,10 +205,12 @@ namespace Practico_Obligatorio
                 try
                 {
                     Console.Write("Cedula o RUT: ");
+
                     documentoCliente = Console.ReadLine();
+
                     if ((documentoCliente != "") && (IsDigitsOnly(documentoCliente)))
                     {
-                        var buscarDocumentoCliente = Lista_Personas.Find(x => x.cedula_Rut == Convert.ToInt32(documentoCliente));
+                        var buscarDocumentoCliente = Lista_Personas.Find(x => x.cedula_Rut == Convert.ToInt64(documentoCliente));
                         if (buscarDocumentoCliente == null)
                         {
                             if ((documentoCliente.Length == 8) ||(documentoCliente.Length == 7))
@@ -224,7 +227,7 @@ namespace Practico_Obligatorio
                             }
                             else if (documentoCliente.Length == 12)
                             {
-                                cliente.cedula_Rut = Convert.ToInt32(documentoCliente);
+                                cliente.cedula_Rut = Convert.ToInt64(documentoCliente);
                                 ingresarDeNuevo = false;
                             }
                             else
@@ -242,6 +245,7 @@ namespace Practico_Obligatorio
                         throw new Exception();
                     }
                 }
+
                 catch (Exception)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -314,7 +318,7 @@ namespace Practico_Obligatorio
             for (int indice = 0; indice < Lista_Personas.Count; indice++)
             {
                 Lista_Personas[indice].ImprimirPersona();
-                Lista_Personas.OrderBy(x => x.cedula_Rut);
+                List<Persona> listaOrdenada = Lista_Personas.OrderBy(x => x.cedula_Rut).ToList();
             }
         }
 

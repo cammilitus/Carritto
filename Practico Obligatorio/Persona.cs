@@ -9,7 +9,7 @@ namespace Practico_Obligatorio
     public class Persona
     {
         public string nombre { get; set; }
-        public int cedula_Rut { get; set; }
+        public long cedula_Rut { get; set; }
         public DateTime fecha_Nacimiento { get; set; }
 
         public virtual void ImprimirPersona()

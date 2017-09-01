@@ -8,13 +8,12 @@ namespace Practico_Obligatorio
     class Program
     {
         static void Main(string[] args)
-        {      
+        {
+            Sistema.Instance.CrearAdmin();
             var programaCorriendo = true;    
             string opcionMenu;            
             while (programaCorriendo)
-            {              
-                Sistema.Instance.CrearAdmin();
-
+            {                
                 if(ManejadorPersona.Instance.nombreUsuarioLogueado == "")
                 {
                     var ingresarDeNuevo = true;
@@ -72,20 +71,24 @@ namespace Practico_Obligatorio
                             //Menu de listado
                             Sistema.Instance.MenuListar();
                             opcionMenu = Console.ReadLine();
-                            switch(Convert.ToInt32(opcionMenu))
+                            opcionChar1 = opcionMenu.ToCharArray();
+                            if ((opcionMenu != "") && (Char.IsNumber(opcionChar1[0])))
                             {
-                                case 1:
-                                    Sistema.Instance.ListarCLientes();
-                                    break;
-                                case 2:
-                                    Sistema.Instance.ListarFacturas();
-                                    break;
-                                case 3:
-                                    Sistema.Instance.InformeStock();
-                                    break;
-                                case 4:
-                                    Sistema.Instance.ListarPersonas();
-                                    break;
+                                switch (Convert.ToInt32(opcionMenu))
+                                {
+                                    case 1:
+                                        Sistema.Instance.ListarCLientes();
+                                        break;
+                                    case 2:
+                                        Sistema.Instance.ListarFacturas();
+                                        break;
+                                    case 3:
+                                        Sistema.Instance.InformeStock();
+                                        break;
+                                    case 4:
+                                        Sistema.Instance.ListarPersonas();
+                                        break;
+                                }
                             }
                             break;
                         case 3:
